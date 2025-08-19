@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject scope;
     public GameObject realScope;
 
+    public float health;
 
     public Camera mainCamera;
     public float cameraOffset = 5.0f;
@@ -29,6 +30,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject head;
     public GameObject bullet;
     public GameObject cannon;
+    public GameObject healthLine;
     public bool reloaded;
 
     public float headRotationPower;
@@ -43,8 +45,13 @@ public class PlayerScript : MonoBehaviour
         MoveTank();
         RotateHead();
         Shoot();
+        ShowHealth();
     }
-
+    
+    void ShowHealth()
+    {
+        healthLine.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, health);
+    }
     void Shoot()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && reloaded)
@@ -107,5 +114,11 @@ public class PlayerScript : MonoBehaviour
         tankRb.AddForce(transform.forward * enginePower * tankRb.mass * Input.GetAxis("Vertical"));
         transform.Rotate(transform.up * engineRotationPower * Time.deltaTime * Input.GetAxis("Horizontal"));
         
-    }    
+    }
+
+    public void ChangeHealth(float amount)
+    {
+        health -= amount;
+        ShowHealth();
+    }
 }

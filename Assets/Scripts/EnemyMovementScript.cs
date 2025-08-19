@@ -17,6 +17,7 @@ public class EnemyMovementScript : MonoBehaviour
     public GameObject head;
     public GameObject cannon;
     public GameObject bullet;
+    public float health;
     void Start()
     {
         player = GameObject.Find("Tank");
@@ -27,6 +28,7 @@ public class EnemyMovementScript : MonoBehaviour
     {
         MoveEnemyTank();
         LookAtPlayer();
+        checkDeath();
     }
 
     public void Shoot()
@@ -69,5 +71,24 @@ public class EnemyMovementScript : MonoBehaviour
             isGoingToPoint = false;
             TankRotationSide = Random.Range(-1, 1);
         }
+    }
+
+    void checkDeath()
+    {
+        if (health <= 0)
+        {
+            GameObject enemyBodyGO = gameObject.transform.Find("EnemyBody").gameObject;
+            GameObject headGO = gameObject.transform.Find("Head").gameObject;
+            GameObject cannonGO = headGO.transform.Find("Cannon").gameObject;
+            enemyBodyGO.GetComponent<Renderer>().material.color = Color.white;
+            headGO.GetComponent<Renderer>().material.color = Color.white;
+            cannonGO.GetComponent<Renderer>().material.color = Color.white;
+            Destroy(GetComponent<EnemyMovementScript>());
+        }
+    }
+
+    public void ChangeHealth(float amount)
+    {
+        health -= amount;
     }
 }
