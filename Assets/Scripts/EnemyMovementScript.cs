@@ -18,11 +18,16 @@ public class EnemyMovementScript : MonoBehaviour
     public GameObject cannon;
     public GameObject bullet;
     public float health;
+    private AudioSource movementAudio;
+    public ParticleSystem rideParticle1;
+    public ParticleSystem rideParticle2;
+    public AudioClip shootSound;
     void Start()
     {
         player = GameObject.Find("Tank");
         tankRb = GetComponent<Rigidbody>();
         currentTime = moveReload;
+        movementAudio = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -33,6 +38,7 @@ public class EnemyMovementScript : MonoBehaviour
 
     public void Shoot()
     {
+        movementAudio.PlayOneShot(shootSound);
         GameObject newBullet = Instantiate(bullet, cannon.transform.position, cannon.transform.rotation);
         Rigidbody newBulletRb = newBullet.GetComponent<Rigidbody>();
         newBulletRb.AddForce(newBullet.transform.forward * shootPower, ForceMode.Impulse);
@@ -65,11 +71,15 @@ public class EnemyMovementScript : MonoBehaviour
         {
             Shoot();
             isGoingToPoint = true;
+            rideParticle1.Play();
+            rideParticle2.Play();
         }
         else if (currentTime > moveReload)
         {
             isGoingToPoint = false;
             TankRotationSide = Random.Range(-1, 1);
+            rideParticle1.Stop();
+            rideParticle2.Stop();
         }
     }
 
@@ -83,6 +93,7 @@ public class EnemyMovementScript : MonoBehaviour
             enemyBodyGO.GetComponent<Renderer>().material.color = Color.white;
             headGO.GetComponent<Renderer>().material.color = Color.white;
             cannonGO.GetComponent<Renderer>().material.color = Color.white;
+            movementAudio.Stop();
             Destroy(GetComponent<EnemyMovementScript>());
         }
     }

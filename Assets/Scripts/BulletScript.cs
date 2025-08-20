@@ -1,9 +1,12 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
     public float playerDamage = 500;
     public float enemyDamage = 200;
+    EnemyMovementScript enemyScript;
+    PlayerScript playerScript;
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Untagged"))
@@ -12,12 +15,17 @@ public class BulletScript : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<EnemyMovementScript>().ChangeHealth(playerDamage);
+            if (collision.gameObject.GetComponent<EnemyMovementScript>())
+            {
+                enemyScript = collision.gameObject.GetComponent<EnemyMovementScript>();
+                enemyScript.ChangeHealth(playerDamage);
+            }
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerScript>().ChangeHealth(enemyDamage);
+            playerScript = collision.gameObject.GetComponent<PlayerScript>();
+            playerScript.ChangeHealth(enemyDamage);
             Destroy(gameObject);
         }
     }
