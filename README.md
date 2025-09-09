@@ -16,7 +16,7 @@
 <img src="https://github.com/DanielSnadon/Tanks/blob/main/Images/Map.png" width="300"/>
 
 ###### _> You're just too lazy to make it better..._
-#### - Right here I'm used some new technologies to make tank rotate his head like real one! :D
+#### - Right here I used some new technologies to make tank rotate his head like real one! :D
 <img src="https://github.com/DanielSnadon/Tanks/blob/main/Images/Scope.png" width="300"/>
 
 ###### _> That's not an invention. Just copy the existing one's technique._
