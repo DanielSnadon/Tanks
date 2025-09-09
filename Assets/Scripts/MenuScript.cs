@@ -9,4 +9,11 @@ public class MenuScript : MonoBehaviour
     {
         SceneManager.LoadScene("MainGame");
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene("MainGame");
+        }
+    }
 }
