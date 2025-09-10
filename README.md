@@ -1,4 +1,4 @@
-# Tanks
+# <img background-color="white" src="https://github.com/DanielSnadon/Tanks/blob/main/Assets/Images/TanksLogo.png" width="300"/> (Tanks)
 ### "Tanks" is a simple game about tanks that I made for my portfolio.
 <img src="https://github.com/DanielSnadon/Tanks/blob/main/Images/Menu.png" width="500"/>
 
